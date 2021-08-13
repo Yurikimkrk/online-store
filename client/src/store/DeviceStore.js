@@ -14,6 +14,18 @@ export default class DeviceStore {
         "name": "Телевизор",
         "createdAt": "2021-08-08T13:13:31.490Z",
         "updatedAt": "2021-08-08T13:13:31.490Z"
+      },
+      {
+        "id": 3,
+        "name": "Телефон",
+        "createdAt": "2021-08-08T13:13:31.490Z",
+        "updatedAt": "2021-08-08T13:13:31.490Z"
+      },
+      {
+        "id": 4,
+        "name": "Компьютер",
+        "createdAt": "2021-08-08T13:13:31.490Z",
+        "updatedAt": "2021-08-08T13:13:31.490Z"
       }
     ]
     this._brands = [
@@ -85,8 +97,33 @@ export default class DeviceStore {
         "updatedAt": "2021-08-09T03:06:41.838Z",
         "typeId": 1,
         "brandId": 4
+      },
+      {
+        "id": 6,
+        "name": "MegaFreeze",
+        "price": 45000,
+        "rating": 0,
+        "img": "freez2",
+        "createdAt": "2021-08-09T03:06:41.838Z",
+        "updatedAt": "2021-08-09T03:06:41.838Z",
+        "typeId": 1,
+        "brandId": 4
+      },
+      {
+        "id": 7,
+        "name": "MegaFreeze",
+        "price": 45000,
+        "rating": 0,
+        "img": "freez2",
+        "createdAt": "2021-08-09T03:06:41.838Z",
+        "updatedAt": "2021-08-09T03:06:41.838Z",
+        "typeId": 1,
+        "brandId": 4
       }
     ]
+    this._selectedType = {}
+    this._selectedBrand = {}
+    makeAutoObservable(this)
   }
   setTypes(types) {
     this._types = types
@@ -97,6 +134,12 @@ export default class DeviceStore {
   setDevices(devices) {
     this._devices = devices
   }
+  setSelectedType(type) {
+    this._selectedType = type
+  }
+  setSelectedBrand(brand) {
+    this._selectedBrand = brand
+  }
 
   get types() {
     return this._types
@@ -106,5 +149,11 @@ export default class DeviceStore {
   }
   get devices() {
     return this._devices
+  }
+  get selectedType() {
+    return this._selectedType
+  }
+  get selectedBrand() {
+    return this._selectedBrand
   }
 }
