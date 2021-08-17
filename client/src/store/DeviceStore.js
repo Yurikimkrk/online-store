@@ -2,127 +2,14 @@ import {makeAutoObservable} from "mobx"
 
 export default class DeviceStore {
   constructor() {
-    this._types = [
-      {
-        "id": 1,
-        "name": "Холодильник",
-        "createdAt": "2021-08-08T12:20:16.195Z",
-        "updatedAt": "2021-08-08T12:20:16.195Z"
-      },
-      {
-        "id": 2,
-        "name": "Телевизор",
-        "createdAt": "2021-08-08T13:13:31.490Z",
-        "updatedAt": "2021-08-08T13:13:31.490Z"
-      },
-      {
-        "id": 3,
-        "name": "Телефон",
-        "createdAt": "2021-08-08T13:13:31.490Z",
-        "updatedAt": "2021-08-08T13:13:31.490Z"
-      },
-      {
-        "id": 4,
-        "name": "Компьютер",
-        "createdAt": "2021-08-08T13:13:31.490Z",
-        "updatedAt": "2021-08-08T13:13:31.490Z"
-      }
-    ]
-    this._brands = [
-      {
-        "id": 1,
-        "name": "Apple",
-        "createdAt": "2021-08-08T13:19:57.246Z",
-        "updatedAt": "2021-08-08T13:19:57.246Z"
-      },
-      {
-        "id": 2,
-        "name": "Honor",
-        "createdAt": "2021-08-08T13:20:07.981Z",
-        "updatedAt": "2021-08-08T13:20:07.981Z"
-      }
-    ]
-    this._devices = [
-      {
-        "id": 1,
-        "name": "12pro",
-        "price": 100000,
-        "rating": 0,
-        "img": "693e055f-6fc1-44aa-89f2-2317712f0ae2.jpg",
-        "createdAt": "2021-08-09T02:31:32.892Z",
-        "updatedAt": "2021-08-09T02:31:32.892Z",
-        "typeId": 3,
-        "brandId": 1
-      },
-      {
-        "id": 2,
-        "name": "30 extreme",
-        "price": 50000,
-        "rating": 0,
-        "img": "6c24646a-cc97-429c-830e-ad4cae54476e.jpg",
-        "createdAt": "2021-08-09T03:05:52.330Z",
-        "updatedAt": "2021-08-09T03:05:52.330Z",
-        "typeId": 3,
-        "brandId": 2
-      },
-      {
-        "id": 3,
-        "name": "iTV",
-        "price": 120000,
-        "rating": 0,
-        "img": "31e55270-30ac-4ddf-a7b7-2fbae9b4de0f.jpg",
-        "createdAt": "2021-08-09T03:06:41.838Z",
-        "updatedAt": "2021-08-09T03:06:41.838Z",
-        "typeId": 2,
-        "brandId": 1
-      },
-      {
-        "id": 4,
-        "name": "Freezer1",
-        "price": 25000,
-        "rating": 0,
-        "img": "freez1",
-        "createdAt": "2021-08-09T03:05:52.330Z",
-        "updatedAt": "2021-08-09T03:05:52.330Z",
-        "typeId": 1,
-        "brandId": 3
-      },
-      {
-        "id": 5,
-        "name": "MegaFreeze",
-        "price": 45000,
-        "rating": 0,
-        "img": "freez2",
-        "createdAt": "2021-08-09T03:06:41.838Z",
-        "updatedAt": "2021-08-09T03:06:41.838Z",
-        "typeId": 1,
-        "brandId": 4
-      },
-      {
-        "id": 6,
-        "name": "MegaFreeze",
-        "price": 45000,
-        "rating": 0,
-        "img": "freez2",
-        "createdAt": "2021-08-09T03:06:41.838Z",
-        "updatedAt": "2021-08-09T03:06:41.838Z",
-        "typeId": 1,
-        "brandId": 4
-      },
-      {
-        "id": 7,
-        "name": "MegaFreeze",
-        "price": 45000,
-        "rating": 0,
-        "img": "freez2",
-        "createdAt": "2021-08-09T03:06:41.838Z",
-        "updatedAt": "2021-08-09T03:06:41.838Z",
-        "typeId": 1,
-        "brandId": 4
-      }
-    ]
+    this._types = []
+    this._brands = []
+    this._devices = []
     this._selectedType = {}
     this._selectedBrand = {}
+    this._page = 1
+    this._totalCount = 0
+    this._limit = 12
     makeAutoObservable(this)
   }
   setTypes(types) {
@@ -135,10 +22,21 @@ export default class DeviceStore {
     this._devices = devices
   }
   setSelectedType(type) {
+    this.setPage(1)
     this._selectedType = type
   }
   setSelectedBrand(brand) {
+    this.setPage(1)
     this._selectedBrand = brand
+  }
+  setPage(page) {
+    this._page = page
+  }
+  setTotalCount(count) {
+    this._totalCount = count
+  }
+  setTLimit(limit) {
+    this._limit = limit
   }
 
   get types() {
@@ -155,5 +53,14 @@ export default class DeviceStore {
   }
   get selectedBrand() {
     return this._selectedBrand
+  }
+  get page() {
+    return this._page
+  }
+  get totalCount() {
+    return this._totalCount
+  }
+  get limit() {
+    return this._limit
   }
 }

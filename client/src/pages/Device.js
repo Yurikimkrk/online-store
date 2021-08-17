@@ -1,32 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Col, Container, Image} from 'react-bootstrap'
-import tv from '../assets/tv.jpg'
 import star from '../assets/star.svg'
+import {fetchOneDevice} from '../http/deviceAPI'
+import {useParams} from 'react-router-dom'
 
 const Device = () => {
-  const device = {
-    'id': 1,
-    'name': '12pro',
-    'price': 100000,
-    'rating': 5,
-    'img': tv,
-    'createdAt': '2021-08-09T02:31:32.892Z',
-    'updatedAt': '2021-08-09T02:31:32.892Z',
-    'typeId': 3,
-    'brandId': 1
-  }
-  const description = [
-    {id: 1, title: 'Диагональ', description: '42 дюйма'},
-    {id: 2, title: 'Разрешение', description: '4к'},
-    {id: 3, title: 'Процессор', description: 'p4'},
-    {id: 4, title: 'Тип дисплея', description: ' LED'},
-    {id: 5, title: 'цвет', description: 'черный'}
-  ]
+  const [device, setDevice] = useState({info: []})
+  const {id} = useParams()
+
+
+  useEffect(() => {
+    fetchOneDevice(id).then(data => setDevice(data))
+  },[])
+
   return (
     <div>
       <Container className="mt-3 d-flex">
         <Col md={6}>
-          <Image width="100%" src={device.img}/>
+          <Image width="100%" src={process.env.REACT_APP_API_URL + device.img}/>
         </Col>
         <Col md={1}>
 
@@ -52,7 +43,7 @@ const Device = () => {
       </Container>
       <Container className='d-flex flex-column mt-4'>
         <h1 className='d-flex align-items-center justify-content-center mb-3'>Характеристики</h1>
-        {description.map((info, index) =>
+        {device.info.map((info, index) =>
             <div key={info.id}
                  style={{backgroundColor: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 8}}>
               {info.title}: {info.description}
